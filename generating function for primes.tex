@@ -1,0 +1,175 @@
+%% Created by Maple V Release 5 (IBM INTEL NT)
+%% Source Worksheet: Untitled (1)
+%% Generated: Sun Mar 06 01:44:44 2022
+\documentclass{article}
+\usepackage{maple2e}
+\DefineParaStyle{Maple Output}
+\DefineCharStyle{2D Math}
+\DefineCharStyle{2D Output}
+\begin{document}
+\begin{maplegroup}
+In this document we will describe how to build a generating function
+for prime numbers.  
+
+Prime numbers are not a well behaved sequence that could be generated
+by a relatively 
+
+simple generating function.  So expect the  level of complexity in
+prime numbers 
+
+to be reflected in this example.  
+
+If we denote by (x, y) the edges of a rectangle then x*y is the
+surface of that rectangle.
+
+lets assume that each integer is a surface that could be represented
+by one or more of 
+
+these surfaces with the condition x and y belong to the set of
+integers.
+
+for example 7 is a prime number and it could be represented by (x, y)
+= (7, 1) or (1, 7)
+
+4 is not a prime and it could be represented by (4, 1)  (1, 4)  (2, 2)
+
+4 is a full square so it will have the extra (2, 2) form.  Other
+numbers
+
+such as 8 could be represented by (4, 2)  (2, 4)  (8, 1) and (1, 8)
+
+In this way every prime number have exactly 2 forms. every full square
+have odd number
+
+of forms,  the other numbers have even number of forms above 2.
+
+First observe that the generating function
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{series(1/(1-x),x,10);}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\[
+1 + x + x^{2} + x^{3} + x^{4} + x^{5} + x^{6} + x^{7} + x^{8} + x
+^{9} + \mathrm{O}(x^{10})
+\]
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+is streght forward expansion whit x  powers  0,1,2....
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\end{mapleinput}
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{series(1/(1-x^2),x,10);}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\[
+1 + x^{2} + x^{4} + x^{6} + x^{8} + \mathrm{O}(x^{10})
+\]
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+The powers of the second series are 0,2,4,6... if we raise x to the
+power n = 7  we get.
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{series(1/(1-x^7),x,20);}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\[
+1 + x^{7} + x^{14} + \mathrm{O}(x^{21})
+\]
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+Now observe that the series of 1/(1-x\symbol{94}2) has 3 as the first
+missing element which is a prime number.
+
+we add 1/(1-x\symbol{94}2) to 1/(1-x\symbol{94}3) the next gap wich is
+5 is a prime number. but we can do better by 
+
+just adding all series and observe that all elements of the resulting
+series starting with 2 are primes.
+
+\end{maplegroup}
+\begin{maplegroup}
+\begin{mapleinput}
+\mapleinline{active}{1d}{series(sum(1/(1-x^i),i = 1..6000),x,60);}{%
+}
+\end{mapleinput}
+
+\mapleresult
+\begin{maplelatex}
+\begin{eqnarray*}
+\lefteqn{6000 + x + 2\,x^{2} + 2\,x^{3} + 3\,x^{4} + 2\,x^{5} + 4
+\,x^{6} + 2\,x^{7} + 4\,x^{8} + 3\,x^{9} + 4\,x^{10} + 2\,x^{11}
+ + 6\,x^{12} + 2\,x^{13}} \\
+ & &  + 4\,x^{14} + 4\,x^{15} + 5\,x^{16} + 2\,x^{17} + 6\,x^{18}
+ + 2\,x^{19} + 6\,x^{20} + 4\,x^{21} + 4\,x^{22} + 2\,x^{23} + 8
+\,x^{24} \\
+ & &  + 3\,x^{25} + 4\,x^{26} + 4\,x^{27} + 6\,x^{28} + 2\,x^{29}
+ + 8\,x^{30} + 2\,x^{31} + 6\,x^{32} + 4\,x^{33} + 4\,x^{34} + 4
+\,x^{35} \\
+ & &  + 9\,x^{36} + 2\,x^{37} + 4\,x^{38} + 4\,x^{39} + 8\,x^{40}
+ + 2\,x^{41} + 8\,x^{42} + 2\,x^{43} + 6\,x^{44} + 6\,x^{45} + 4
+\,x^{46} \\
+ & &  + 2\,x^{47} + 10\,x^{48} + 3\,x^{49} + 6\,x^{50} + 4\,x^{51
+} + 6\,x^{52} + 2\,x^{53} + 8\,x^{54} + 4\,x^{55} + 8\,x^{56} + 4
+\,x^{57} \\
+ & &  + 4\,x^{58} + 2\,x^{59} + \mathrm{O}(x^{60})
+\mbox{\hspace{280pt}}
+\end{eqnarray*}
+\end{maplelatex}
+
+\end{maplegroup}
+\begin{maplegroup}
+The example above limits the search to 6000 integers and the primes
+within the set.  All prime powers
+
+start with 2. Example 2x\symbol{94}41 means 41 is a prime.
+5x\symbol{94}16 start with an odd number because it is a full square.
+
+All other numbers start with even numbers that represent the number of
+combinations of surfaces that could be
+
+made from that number as explained above.
+
+we can represent this frame by the function y = n/x where the graph of
+this function passes by the top right 
+
+corner of a rectangle x * y.  If n is a prime then the graph pass only
+by (x, y) = (1, n) and (n, 1).
+
+This method of finding primes by generating functin is costly in terms
+of computing capacity.  The function
+
+y = n/x could be used to derive algorithms that looks for primes
+between two full square numbers of the 
+
+approximity of a given number.
+
+\end{maplegroup}
+\end{document}
+%% End of Maple V Output
